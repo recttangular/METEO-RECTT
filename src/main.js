@@ -2,17 +2,29 @@
 // Import: Memanggil bantuan dari file lain
 import { cities } from './utils.js';
 import { fetchWeather } from './api.js';
+import { renderWeatherCard } from './dom.js';
 
 const init = async () => {
-    // 1. Ambil kota pertama dari gudang (Jakarta)
-    const city = cities[0]; 
-    console.log(`Sedang mengecek cuaca di: ${city.name}...`);
+    const container = document.getElementById('weather-container');
+// Bersihkan layar dulu biar bersih
+    container.innerHTML = '<p>Sedang memuat data cuaca...</p>';
 
-    // 2. Suruh kurir cek cuaca di koordinat Jakarta
-    const weatherData = await fetchWeather(city.lat, city.lon);
+    // Hapus pesan loading setelah sebentar (opsional, biar rapi)
+    container.innerHTML = '';
 
-    // 3. Tampilkan laporannya di Console (Layar hitam Inspect Element)
-    console.log("Laporan Cuaca Diterima:", weatherData);
+    console.log("Memulai aplikasi METEO-RECTT...");
+    // Looping untuk setiap kota (Roadmap: Array Methods)
+    for (const city of cities) {
+        // 1. Ambil data dari API
+        const weatherData = await fetchWeather(city.lat, city.lon);
+
+        // 2. Jika data berhasil diambil, tampilkan ke layar
+        if (weatherData) {
+            renderWeatherCard(city, weatherData);
+        } else {
+            console.error(`Gagal memuat data untuk ${city.name}`);
+        }
+    }
 };
 
 // Jalankan perintah manajer

@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>METEO-RECTT Weather App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <header>
-        <h1>METEO-RECTT</h1>
-        <p>Pantauan Cuaca Realtime</p>
+<body class="bg-slate-100 text-slate-800">
+    <header class="bg-blue-600 text-white p-6 shadow-md mb-6">
+        <h1 class="text-3xl font-bold">METEO-RECTT</h1>
+        <p class="opacity-80">Pantauan Cuaca Realtime</p>
     </header>
 
-    <main id="weather-container">
+    <main id="weather-container" class ="max-w-5xl mx-auto p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         </main>
     <script type="module" src="./src/main.js"></script>
 </body>

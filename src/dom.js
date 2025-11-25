@@ -11,11 +11,25 @@ export const renderWeatherCard = (city, weatherData) => {
 
     // 3. Susun HTML-nya pakai Backticks (`)
     const cardHTML = `
-        <div class="weather-card" style="border: 1px solid #ccc; padding: 10px; margin: 10px; border-radius: 8px;">
-            <h3>${city.name}</h3>
-            <p>Suhu: <strong>${temperature}°C</strong></p>
-            <p>Kode Cuaca: ${weathercode}</p>
-            <small>Lat: ${city.lat}, Lon: ${city.lon}</small>
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 p-6 border-l-4 border-blue-500">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <h3 class="text-xl font-bold text-slate-800">${city.name}</h3>
+                    <p class="text-xs text-slate-500">Lat: ${city.lat}, Lon: ${city.lon}</p>
+                </div>
+                <div class="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded">
+                    Realtime
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <div class="text-4xl font-bold text-blue-600">
+                    ${temperature}°C
+                </div>
+                <div class="text-sm text-slate-600">
+                    <p>Kode Cuaca: <span class="font-medium">${weathercode}</span></p>
+                </div>
+            </div>
         </div>
     `;
 
