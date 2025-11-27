@@ -10,17 +10,24 @@ export const renderWeatherCard = (city, weatherData) => {
     
     // 1. Ambil Data
     const { temperature, weathercode } = weatherData.current_weather;
-    const visual = getWeatherIcon(weathercode); // Pakai logika ikon baru
+    const visual = getWeatherIcon(weathercode); 
     const { time, weathercode: dailyCodes, temperature_2m_max, temperature_2m_min } = weatherData.daily;
 
-    // 2. Loop Prediksi 3 Hari
+    // 2. Loop Prediksi 3 Hari (BAGIAN YANG DI-UPDATE)
     let forecastHTML = '';
     for (let i = 1; i <= 3; i++) {
         const dailyVisual = getWeatherIcon(dailyCodes[i]);
+        
+        // Perhatikan class di bawah ini:
+        // hover:-translate-y-1  -> Geser ke atas 1 unit saat hover
+        // hover:shadow-lg       -> Tambah bayangan agar terlihat melayang
+        // hover:bg-white/20     -> Terangkan warna background
+        // cursor-pointer        -> Ubah kursor jadi telunjuk
+        // transition-all        -> Animasi pergerakan halus
         forecastHTML += `
-            <div class="flex flex-col items-center p-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition">
-                <span class="text-[10px] font-bold text-white/70 uppercase tracking-wide">${formatDay(time[i])}</span>
-                <span class="text-2xl my-1 drop-shadow-md">${dailyVisual.icon}</span>
+            <div class="flex flex-col items-center p-2 rounded-lg bg-white/5 border border-white/10 transition-all duration-300 hover:bg-white/20 hover:-translate-y-1 hover:shadow-lg cursor-pointer group/item">
+                <span class="text-[10px] font-bold text-white/70 uppercase tracking-wide group-hover/item:text-pink-300 transition-colors">${formatDay(time[i])}</span>
+                <span class="text-2xl my-1 drop-shadow-md transform group-hover/item:scale-110 transition-transform">${dailyVisual.icon}</span>
                 <div class="flex gap-2 text-xs text-white">
                     <span class="font-bold">${Math.round(temperature_2m_max[i])}°</span>
                     <span class="opacity-50">${Math.round(temperature_2m_min[i])}°</span>
@@ -29,14 +36,13 @@ export const renderWeatherCard = (city, weatherData) => {
         `;
     }
 
-    // 3. Susun Card Glassmorphism
-    // Perhatikan class 'backdrop-blur-md' dan 'bg-white/10' (Tailwind)
+    // 3. Susun Card Utama
     const cardHTML = `
         <div class="group relative overflow-hidden rounded-3xl bg-white/10 p-6 text-white shadow-2xl backdrop-blur-md border border-white/20 hover:bg-white/15 transition-all duration-500 hover:-translate-y-2">
             
             <div class="flex justify-between items-start mb-6">
                 <div>
-                    <h3 class="text-2xl font-bold tracking-tight drop-shadow-md">${city.name}</h3>
+                    <h3 class="text-2xl font-bold tracking-tight drop-shadow-md group-hover:text-pink-200 transition-colors">${city.name}</h3>
                     <p class="text-xs text-blue-200/80 flex items-center gap-1 mt-1">
                         📍 ${parseFloat(city.lat).toFixed(2)}, ${parseFloat(city.lon).toFixed(2)}
                     </p>
@@ -46,7 +52,7 @@ export const renderWeatherCard = (city, weatherData) => {
                 </div>
             </div>
 
-            <div class="flex items-center gap-4 mb-6 bg-black/20 p-4 rounded-2xl border border-white/5 shadow-inner">
+            <div class="flex items-center gap-4 mb-6 bg-black/20 p-4 rounded-2xl border border-white/5 shadow-inner transition hover:border-white/20">
                 <span class="text-5xl filter drop-shadow-xl animate-pulse">${visual.icon}</span>
                 <div>
                     <p class="text-lg font-bold text-white">${visual.label}</p>
