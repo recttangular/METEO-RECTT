@@ -3,34 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>METEO-RECTT Weather App</title>
+    <title>METEO-RECTT Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<header class="bg-blue-600 text-white p-6 shadow-md mb-6 sticky top-0 z-50">
-    <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-        
-        <div>
-            <h1 class="text-3xl font-bold">METEO-RECTT</h1>
-            <p class="opacity-80">Pantauan Cuaca Realtime</p>
-        </div>
+<body class="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-950 min-h-screen text-slate-800 antialiased selection:bg-pink-500 selection:text-white">
 
-        <input 
-            type="text" 
-            id="search-input" 
-            placeholder="Cari kota (misal: Jakarta)..." 
-            class="w-full md:w-1/3 px-4 py-2 rounded-lg text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-300 shadow-sm"
-        >
-    </div>
-</header>
-<body class="bg-slate-100 text-slate-800">
-    <header class="bg-blue-600 text-white p-6 shadow-md mb-6">
-        <h1 class="text-3xl font-bold">METEO-RECTT</h1>
-        <p class="opacity-80">Pantauan Cuaca Realtime</p>
+    <header class="fixed top-0 w-full z-50 backdrop-blur-xl bg-black/20 border-b border-white/10 shadow-lg">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center p-4 gap-4">
+            
+            <div class="flex flex-col items-center md:items-start">
+                <h1 class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-400 tracking-tight">
+                    METEO-RECTT
+                </h1>
+                <div class="flex items-center gap-2 text-xs font-mono text-blue-200">
+                    <span id="digital-clock">00:00:00</span>
+                    <span class="opacity-30">|</span>
+                    <span class="tracking-widest uppercase opacity-70">Live Dashboard</span>
+                </div>
+            </div>
+
+            <div class="flex w-full md:w-auto gap-2">
+                <div class="relative w-full md:w-64">
+                    <input 
+                        type="text" 
+                        id="search-input" 
+                        placeholder="Cari kota..." 
+                        class="w-full bg-white/10 border border-white/20 text-white placeholder-white/30 rounded-full py-2 px-4 focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all text-sm"
+                    >
+                </div>
+                
+                <button id="btn-location" class="bg-pink-600 hover:bg-pink-500 text-white p-2 rounded-full shadow-lg shadow-pink-600/20 transition-all active:scale-95 group" title="Lokasi Saya">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
     </header>
 
-    <main id="weather-container" class ="max-w-5xl mx-auto p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <main id="weather-container" class="max-w-6xl mx-auto p-4 pt-32 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-20">
         </main>
+
     <script type="module" src="./src/main.js"></script>
 </body>
-<script type="module" src="./src/main.js"></script>
 </html>
